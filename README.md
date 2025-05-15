@@ -1,6 +1,6 @@
 # Xenith
 Hackathon 2025 (DSATM)
-# 🌿 Rural Health Connect
+# 🌿 Aarogya Mitr
 
 **Rural Health Connect** is a web application designed to support healthcare delivery in rural areas. It helps healthcare workers and organizations **fetch, maintain, and manage patient records** efficiently, while also **informing communities about upcoming health camps and services**.
 
