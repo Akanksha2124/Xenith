@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Login Page</title>
+    <link rel="stylesheet" href="PatientLogin.css">
+</head>
+<body>
+    <div class="outer-box">
+        <div class="inner-box">
+            <header class="signup-header">
+                <h1>SignIn</h1>
+                <p>It just takes 30 sec</p>
+            </header>
+            <main class="signup-body">
+                <form action="../Main_Page/main.html">
+                   <p>
+                    <label for="fullname">User Name</label>
+                    <input type="text" id="fullname" placeholder="Amrit Parashar" required>
+                </p>
+                <p>
+                    <label for="aadharCard">AadharCard Number</label>
+                    <input type="number" id="aadharCard" placeholder="" required>
+                </p>
+                <p>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="atleast 8 characters" required>
+                </p>
+                <p>
+                    <input type="submit" id="submit" value="Login">
+                </p>
+                </form>
+            </main>
+
+            <footer class="signup-footer">
+                <p>Don't have an account? <a href="/PatientRegister/register.html">Register</a></p>
+
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

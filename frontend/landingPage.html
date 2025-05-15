@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arogya Mitra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <style>
+    html{
+      scroll-behavior: smooth !important;
+    }
+
+    .hero-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .custom-shape-divider {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .custom-shape-divider svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 70px;
+    }
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    .gradient-text {
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-image: linear-gradient(45deg, #3b82f6, #2563eb);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <!-- Navbar -->
+<nav class="bg-white shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <i class="fas fa-heartbeat text-blue-600 text-2xl mr-2"></i>
+        <h1 class="text-2xl font-bold gradient-text">Arogya Mitra</h1>
+      </div>
+      <!-- Hamburger Button (mobile only) -->
+      <button id="menu-toggle" class="lg:hidden text-gray-700 focus:outline-none">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+      <!-- Desktop Menu -->
+      <div class="hidden lg:flex items-center space-x-4">
+        <a href="#hero" class="text-gray-500 hover:text-blue-600 px-3 py-2 text-sm font-medium">Home</a>
+        <a href="#about" class="text-gray-500 hover:text-blue-600 px-3 py-2 text-sm font-medium">About</a>
+        <a href="#features" class="text-gray-500 hover:text-blue-600 px-3 py-2 text-sm font-medium">Services</a>
+        <a href="#contact" class="text-gray-500 hover:text-blue-600 px-3 py-2 text-sm font-medium">Contact</a>
+        <a href="doctor-login.html" class="text-blue-600 hover:underline px-3 py-2 text-sm font-medium">Sign In</a>
+        <a href="../PatientRegister/register.html" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition shadow-md text-sm font-medium flex items-center">
+          <span>Register</span>
+          <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Overlay Background -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-40"></div>
+  
+  <!-- Sidebar (Mobile Menu) -->
+  <div id="sidebar" class="fixed top-0 right-0 w-64 h-full bg-white shadow-lg transform translate-x-full transition-all duration-300 ease-in-out z-50 lg:hidden overflow-y-auto">
+    <div class="p-4 flex justify-between items-center border-b">
+      <h2 class="text-xl font-semibold">Menu</h2>
+      <button id="close-sidebar" class="text-gray-500 hover:text-red-500 focus:outline-none">
+        <i class="fas fa-times text-2xl"></i>
+      </button>
+    </div>
+    <div class="flex flex-col p-4 space-y-4">
+      <a href="#hero" class="mobile-link text-gray-700 hover:text-blue-600 transition-transform duration-200 hover:translate-x-2">Home</a>
+      <a href="#about" class="mobile-link text-gray-700 hover:text-blue-600 transition-transform duration-200 hover:translate-x-2">About</a>
+      <a href="#features" class="mobile-link text-gray-700 hover:text-blue-600 transition-transform duration-200 hover:translate-x-2">Services</a>
+      <a href="#contact" class="mobile-link text-gray-700 hover:text-blue-600 transition-transform duration-200 hover:translate-x-2">Contact</a>
+      <a href="doctor-login.html" class="mobile-link text-blue-600 hover:underline transition-transform duration-200 hover:translate-x-2">Sign In</a>
+      <a href="../PatientRegister/register.html" class="mobile-link bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-all duration-200 shadow-md text-center flex items-center justify-center">
+        <span>Register</span>
+        <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Script for toggling sidebar with enhanced animations -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+    const closeBtn = document.getElementById("close-sidebar");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+    const body = document.body;
+    
+    // Function to open sidebar
+    function openSidebar() {
+      sidebar.classList.remove("translate-x-full");
+      overlay.classList.remove("opacity-0");
+      overlay.classList.add("opacity-50");
+      overlay.classList.remove("pointer-events-none");
+      body.classList.add("overflow-hidden");
+    }
+    
+    // Function to close sidebar
+    function closeSidebar() {
+      sidebar.classList.add("translate-x-full");
+      overlay.classList.remove("opacity-50");
+      overlay.classList.add("opacity-0");
+      overlay.classList.add("pointer-events-none");
+      body.classList.remove("overflow-hidden");
+    }
+    
+    // Toggle sidebar on menu button click
+    toggleBtn.addEventListener("click", openSidebar);
+    
+    // Close sidebar when close button is clicked
+    closeBtn.addEventListener("click", closeSidebar);
+    
+    // Close sidebar when overlay is clicked
+    overlay.addEventListener("click", closeSidebar);
+    
+    // Close sidebar when a link is clicked
+    mobileLinks.forEach(link => {
+      link.addEventListener("click", function() {
+        // Add a small delay before closing to show the link effect
+        setTimeout(closeSidebar, 150);
+      });
+    });
+    
+    // Close sidebar when escape key is pressed
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") {
+        closeSidebar();
+      }
+    });
+  });
+</script>
+
+<!-- Add basic styles to demonstrate gradient text if not defined elsewhere -->
+<style>
+  .gradient-text {
+    background: linear-gradient(90deg, #3182ce, #63b3ed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
+
+<!-- JavaScript for toggle -->
+<script>
+  const toggleBtn = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu");
+
+  toggleBtn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+</script>
+
+  <!-- Hero Section with Background -->
+  <section class="relative bg-gradient-to-r from-blue-500 to-blue-700 text-white py-24" id="hero">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-4">Welcome to the Arogya Mitra Portal</h2>
+      <p class="text-xl md:text-2xl mb-8 opacity-90">Empowering villages with accessible and digital health solutions</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+        <a href="../PatientRegister/register.html" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium shadow-lg hover:shadow-xl transition flex items-center justify-center">
+          <span>Get Started</span>
+          <i class="fas fa-chevron-right ml-2"></i>
+        </a>
+        <a href="#features" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition flex items-center justify-center">
+          <span>Explore Features</span>
+          <i class="fas fa-arrow-down ml-2"></i>
+        </a>
+      </div>
+      
+      <!-- Stats Section -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto">
+        <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-lg p-6 border border-white border-opacity-20">
+          <i class="fas fa-users text-3xl mb-3"></i>
+          <h3 class="text-3xl font-bold">500+</h3>
+          <p class="opacity-80">Villagers Served</p>
+        </div>
+        <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-lg p-6 border border-white border-opacity-20">
+          <i class="fas fa-hospital text-3xl mb-3"></i>
+          <h3 class="text-3xl font-bold">12+</h3>
+          <p class="opacity-80">Rural Facilities</p>
+        </div>
+        <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm rounded-lg p-6 border border-white border-opacity-20">
+          <i class="fas fa-language text-3xl mb-3"></i>
+          <h3 class="text-3xl font-bold">5</h3>
+          <p class="opacity-80">Regional Languages.. Coming soon</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Wave Separator -->
+    <div class="custom-shape-divider">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#f9fafb"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Mission Statement -->
+  <section class="py-16 bg-gray-50" id="about">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">Our Mission</span>
+      <h2 class="text-3xl font-bold text-gray-800 mt-2 mb-6">Bringing Quality Healthcare to Rural India</h2>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        We're committed to bridging the healthcare gap between urban and rural areas by leveraging technology. 
+        Our platform connects villagers to medical professionals, simplifies health record access, and ensures 
+        critical health services reach those who need it most.
+      </p>
+    </div>
+  </section>
+
+  <!-- Features Grid with ID for scroll -->
+  <section id="features" class="py-16 bg-white" >
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">What We Offer</span>
+        <h2 class="text-3xl font-bold text-gray-800 mt-2">Digital Healthcare Solutions</h2>
+        <p class="text-gray-600 mt-4 max-w-3xl mx-auto">Our comprehensive set of tools designed specifically for rural areas with limited connectivity and resources.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Aadhaar Access Card -->
+        <div class="bg-white border border-gray-100 shadow-lg rounded-xl p-6 hover:shadow-xl transition group hover:border-blue-100">
+          <div class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
+            <i class="fas fa-id-card text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">Aadhaar/QR Patient Record</h3>
+          <p class="text-gray-600 mb-4">Access your complete medical history instantly by scanning your Aadhaar card or QR code. No more lost records or repeated tests.</p>
+          <a href="./aadhar-access.html" class="text-blue-600 font-medium hover:underline flex items-center">
+            <span>Access Now</span>
+            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+          </a>
+        </div>
+
+        <!-- Voice Assistant -->
+        <div class="bg-white border border-gray-100 shadow-lg rounded-xl p-6 hover:shadow-xl transition group hover:border-blue-100">
+          <div class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
+            <i class="fas fa-microphone-alt text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">Voice Assistant</h3>
+          <p class="text-gray-600 mb-4">Ask health questions in your regional language. Our AI assistant understands 12 Indian languages and provides reliable health guidance.</p>
+          <a href="./voice-assistant.html" class="text-blue-600 font-medium hover:underline flex items-center">
+            <span>Try Assistant</span>
+            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+          </a>
+        </div>
+
+        <!-- Nearby Hospitals -->
+        <div class="bg-white border border-gray-100 shadow-lg rounded-xl p-6 hover:shadow-xl transition group hover:border-blue-100">
+          <div class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
+            <i class="fas fa-hospital text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">Nearby Hospitals & Health Camps</h3>
+          <p class="text-gray-600 mb-4">Locate the closest healthcare facilities and receive timely notifications about upcoming health camps in your area.</p>
+          <a href="./nearby-hospitals.html" class="text-blue-600 font-medium hover:underline flex items-center">
+            <span>View Nearby</span>
+            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+          </a>
+        </div>
+
+        <!-- Ayushman Checker -->
+        <div class="bg-white border border-gray-100 shadow-lg rounded-xl p-6 hover:shadow-xl transition group hover:border-blue-100">
+          <div class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
+            <i class="fas fa-check-circle text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">Ayushman Bharat Checker</h3>
+          <p class="text-gray-600 mb-4">Instantly verify your eligibility for the Ayushman Bharat scheme and learn how to claim benefits for free healthcare.</p>
+          <a href="./ayushman-check.html" class="text-blue-600 font-medium hover:underline flex items-center">
+            <span>Check Eligibility</span>
+            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+          </a>
+        </div>
+
+        <!-- Multilingual Support -->
+        <div class="bg-white border border-gray-100 shadow-lg rounded-xl p-6 hover:shadow-xl transition group hover:border-blue-100">
+          <div class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
+            <i class="fas fa-language text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">Multilingual Support</h3>
+          <p class="text-gray-600 mb-4">Access healthcare information in  regional languages including Hindi Tamil, Telugu, and more.Coming soon..</p>
+          <a href="./language-settings.html" class="text-blue-600 font-medium hover:underline flex items-center">
+            <span>Change Language</span>
+            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+          </a>
+        </div>
+
+        <!-- Admin/Doctor Login -->
+        <div class="bg-white border border-gray-100 shadow-lg rounded-xl p-6 hover:shadow-xl transition group hover:border-blue-100">
+          <div class="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
+            <i class="fas fa-user-md text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">Healthcare Workers Panel</h3>
+          <p class="text-gray-600 mb-4">Dedicated portal for doctors, nurses and health workers to manage patient records and organize community health initiatives.</p>
+          <a href="./doctor-login.html" class="text-blue-600 font-medium hover:underline flex items-center">
+            <span>Login as Healthcare Worker</span>
+            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm">Success Stories</span>
+        <h2 class="text-3xl font-bold text-gray-800 mt-2">Making a Difference</h2>
+        <p class="text-gray-600 mt-4 max-w-3xl mx-auto">Hear from the people who have benefited from our digital healthcare solutions.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xl">
+              RS
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold">Ramesh</h4>
+              <p class="text-sm text-gray-500">Farmer, Karnataka</p>
+            </div>
+          </div>
+          <p class="text-gray-600">"ಡಿಜಿಟಲ್ ಹೆಲ್ತ್ ಪಾಲ್ಟಲ್ ನನ್ನ ಆರೋಗ್ಯದ ದೃಷ್ಟಿಯಿಂದ ಬಹಳ ಉಪಯುಕ್ತವಾಗಿದೆ. ಚಿಕ್ಕ ನೊರೆಯ ಸಮಸ್ಯೆಗಳಿಗಾಗಿ ನಾನು ಆಸ್ಪತ್ರೆಗೆ ಹೋಗಬೇಕಾಗಿಲ್ಲ. ನಾನು ನನ್ನ ಆರೋಗ್ಯದ ಮಾಹಿತಿಯನ್ನು ನೇರವಾಗಿ ನನ್ನ ಫೋನಿನಲ್ಲಿ ನೋಡಬಹುದು."</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xl">
+              PD
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold">Priya Devi</h4>
+              <p class="text-sm text-gray-500">ASHA Worker, Bihar</p>
+            </div>
+          </div>
+          <p class="text-gray-600">"As an ASHA worker, the healthcare portal helps me track health records of villagers efficiently. The notifications about health camps have increased attendance by 70%."</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xl">
+              SK
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold">Suresh Kumar</h4>
+              <p class="text-sm text-gray-500">Driver, Tamil Nadu</p>
+            </div>
+          </div>
+          <p class="text-gray-600">"நாம் பயன் பெறும் ஆரோக்கிய பராமரிப்பு சேவைகள் மிக எளிதாக கிடைக்கின்றன. நான் மற்றும் என் குடும்பத்தினர் அனைத்து மருத்துவ சந்திப்புகளையும் டிஜிட்டல் பேஸில் பதிவுசெய்ய முடிகிறது, இது எங்கள் சுகாதாரத்தை கண்காணிக்க உதவுகிறது."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="bg-blue-600 text-white py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-6">Ready to Access Better Healthcare?</h2>
+      <p class="text-xl opacity-90 mb-8">Join thousands of rural citizens benefiting from digital healthcare solutions.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="./PatientRegister/register.html" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium shadow-lg hover:shadow-xl transition pulse-animation">
+          Register Now
+        </a>
+        <a href="#" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">
+          Learn More
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white pt-12 pb-6" id="contact">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Rural Health Portal</h3>
+          <p class="text-gray-400">Bridging the healthcare divide through digital innovation.</p>
+          <div class="flex mt-4 space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+            <li><a href="#about" class="text-gray-400 hover:text-white">About Us</a></li>
+            <li><a href="#features" class="text-gray-400 hover:text-white">Services</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Services</h4>
+          <ul class="space-y-2">
+            <li><a href="./aadhar-access.html" class="text-gray-400 hover:text-white">Patient Records</a></li>
+            <li><a href="./voice-assistant.html" class="text-gray-400 hover:text-white">Voice Assistant</a></li>
+            <li><a href="./nearby-hospitals.html" class="text-gray-400 hover:text-white">Nearby Hospitals</a></li>
+            <li><a href="./ayushman-check.html" class="text-gray-400 hover:text-white">Ayushman Checker</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Contact</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-start">
+              <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+              <span>Rural Health Initiative, New Delhi, India</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-phone mt-1 mr-2"></i>
+              <span>+91 1800-XXX-XXXX</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-envelope mt-1 mr-2"></i>
+              <span>support@ruralhealthportal.in</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+        <p>© 2025 Rural Health Portal. All rights reserved.</p>
+        <div class="mt-2">
+          <a href="#" class="text-gray-400 hover:text-white mr-4">Privacy Policy</a>
+          <a href="#" class="text-gray-400 hover:text-white mr-4">Terms of Service</a>
+          <a href="#" class="text-gray-400 hover:text-white">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

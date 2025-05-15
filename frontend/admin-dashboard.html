@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Arogya Mitra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md py-4 px-6 flex items-center justify-between relative">
+        <!-- Left: Arogya Mitra -->
+        <div class="absolute left-6">
+          <h1 class="text-2xl font-bold text-blue-600">
+            <a href="./landingPage.html">Arogya Mitra</a>
+          </h1>
+        </div>
+      
+        <!-- Center: Admin Dashboard -->
+        <div class="mx-auto">
+          <h2 class="text-xl font-semibold text-gray-800">Healthcare Worker Dashboard</h2>
+        </div>
+      
+        <!-- Right: Logout -->
+        <div class="absolute right-6">
+            <a href="/doctor-login.html" class="text-blue-600 hover:underline">Logout</a>
+        </div>
+      </header>
+      
+
+  <div class="flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white p-6 shadow-lg">
+      <nav class="space-y-4">
+        <a href="#dashboard" class="block text-gray-700 hover:text-blue-600">Dashboard</a>
+        <a href="#patients" class="block text-gray-700 hover:text-blue-600">Patient Records</a>
+        <a href="#health-camps" class="block text-gray-700 hover:text-blue-600">Health Camps</a>
+        <a href="#reports" class="block text-gray-700 hover:text-blue-600">Reports</a>
+        <a href="#settings" class="block text-gray-700 hover:text-blue-600">Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6">
+      <!-- Dashboard Overview -->
+      <section id="dashboard" class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Welcome!</h2>
+        <p class="mt-2 text-gray-600">Overview of system statistics and recent activities.</p>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Total Patients Card -->
+          <div class="bg-white p-4 rounded-xl shadow">
+            <h3 class="text-lg font-semibold text-gray-700">Total Patients</h3>
+            <p class="mt-2 text-3xl text-blue-600">250</p>
+          </div>
+          <!-- Active Health Camps Card -->
+          <div class="bg-white p-4 rounded-xl shadow">
+            <h3 class="text-lg font-semibold text-gray-700">Active Health Camps</h3>
+            <p class="mt-2 text-3xl text-blue-600">2</p>
+          </div>
+          <!-- Pending Approvals Card -->
+          <div class="bg-white p-4 rounded-xl shadow">
+            <h3 class="text-lg font-semibold text-gray-700">Pending Approvals</h3>
+            <p class="mt-2 text-3xl text-blue-600">10</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Patient Records Section -->
+      <section id="patients" class="mb-8">
+        <h2 class="text-xl font-bold text-gray-800">Patient Records</h2>
+        <p class="mt-2 text-gray-600">View and manage patient data.</p>
+        <div class="mt-4 overflow-x-auto">
+          <table class="min-w-full bg-white shadow rounded">
+            <thead>
+              <tr class="bg-blue-600 text-white">
+                <th class="py-2 px-4 text-left">Patient ID</th>
+                <th class="py-2 px-4 text-left">Name</th>
+                <th class="py-2 px-4 text-left">Age</th>
+                <th class="py-2 px-4 text-left">Last Visit</th>
+                <th class="py-2 px-4 text-left">Status</th>
+                <th class="py-2 px-4 text-left">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-700" >
+
+             </tbody>
+             
+              
+          </table>
+        </div>
+        
+      </section>
+
+      <!-- Health Camps Section -->
+      <section id="health-camps" class="mb-8">
+        <h2 class="text-xl font-bold text-gray-800">Health Camps</h2>
+        <p class="mt-2 text-gray-600">Manage upcoming and past health camp details.</p>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Health Camp Card -->
+          <div class="bg-white p-4 rounded-xl shadow">
+            <h3 class="text-lg font-semibold text-gray-700">Camp at Village X</h3>
+            <p class="mt-1 text-gray-600">Date: 20 April 2025</p>
+            <p class="mt-1 text-gray-600">Location: Village X Community Center</p>
+            <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">View Details</button>
+          </div>
+          <!-- Additional Health Camp Card -->
+          <div class="bg-white p-4 rounded-xl shadow">
+            <h3 class="text-lg font-semibold text-gray-700">Camp at Village Y</h3>
+            <p class="mt-1 text-gray-600">Date: 25 April 2025</p>
+            <p class="mt-1 text-gray-600">Location: Village Y School</p>
+            <button class="mt-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">View Details</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reports Section -->
+      <section id="reports" class="mb-8">
+        <h2 class="text-xl font-bold text-gray-800">Reports</h2>
+        <p class="mt-2 text-gray-600">Overview of key statistics and trends.</p>
+        <div class="mt-4 bg-white p-6 rounded-xl shadow">
+          <p class="text-gray-700">No new reports available at the moment. Check back later.</p>
+        </div>
+      </section>
+
+      <!-- Settings Section -->
+      <section id="settings">
+        <h2 class="text-xl font-bold text-gray-800">Settings</h2>
+        <p class="mt-2 text-gray-600">Manage admin account settings and portal configurations.</p>
+        <div class="mt-4">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+            Update Profile
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+
+  <!-- Patient Update Modal -->
+<div id="updateModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+    <h2 class="text-xl font-bold mb-4 text-gray-800">Update Patient Info</h2>
+    <form id="updatePatientForm">
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-1">Patient ID</label>
+        <input id="modalPatientId" type="text" class="w-full border rounded px-3 py-2" readonly />
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-1">Name</label>
+        <input id="modalPatientName" type="text" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-1">Age</label>
+        <input id="modalPatientAge" type="number" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-1">Status</label>
+        <select id="modalPatientStatus" class="w-full border rounded px-3 py-2">
+          <option>Active</option>
+          <option>Inactive</option>
+          <option>Discharged</option>
+        </select>
+      </div>
+      <div class="flex justify-end gap-2">
+        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
+      </div>
+    </form>
+    <!-- Close button (X) -->
+    <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+  </div>
+</div>
+
+
+<script>
+  // Simulated patient data (in real apps this comes from a database or API)
+  let patients = [
+    { id: '#P003', name: 'John Doe', age: 50, lastVisit: '05 March 2025', status: 'Active' },
+    { id: '#P004', name: 'Anita Sharma', age: 34, lastVisit: '02 March 2025', status: 'Inactive' },
+    { id: '#P005', name: 'Vikram Singh', age: 40, lastVisit: '01 March 2025', status: 'Active' },
+    { id: '#P006', name: 'Meena Patel', age: 28, lastVisit: '25 Feb 2025', status: 'Active' },
+    { id: '#P007', name: 'Rahul Nair', age: 33, lastVisit: '20 Feb 2025', status: 'Inactive' },
+    { id: '#P008', name: 'Lakshmi Menon', age: 29, lastVisit: '15 Feb 2025', status: 'Active' },
+    { id: '#P009', name: 'Ravi Kumar', age: 46, lastVisit: '10 Feb 2025', status: 'Inactive' },
+    { id: '#P010', name: 'Kavita Joshi', age: 39, lastVisit: '05 Feb 2025', status: 'Active' },
+    { id: '#P011', name: 'Surya Prakash', age: 42, lastVisit: '02 Feb 2025', status: 'Active' },
+    { id: '#P012', name: 'Priya Gupta', age: 31, lastVisit: '01 Feb 2025', status: 'Inactive' }
+  ];
+
+  // Modal open function
+  function openModal(patientId, name, age, status) {
+    document.getElementById('modalPatientId').value = patientId;
+    document.getElementById('modalPatientName').value = name;
+    document.getElementById('modalPatientAge').value = age;
+    document.getElementById('modalPatientStatus').value = status;
+    document.getElementById('updateModal').classList.remove('hidden');
+  }
+
+  // Modal close function
+  function closeModal() {
+    document.getElementById('updateModal').classList.add('hidden');
+  }
+
+  // Handle Save button (form submit)
+  document.getElementById('updatePatientForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const updatedId = document.getElementById('modalPatientId').value;
+    const updatedName = document.getElementById('modalPatientName').value;
+    const updatedAge = parseInt(document.getElementById('modalPatientAge').value);
+    const updatedStatus = document.getElementById('modalPatientStatus').value;
+
+    // Update patient in array
+    patients = patients.map(patient => {
+      if (patient.id === updatedId) {
+        return { ...patient, name: updatedName, age: updatedAge, status: updatedStatus };
+      }
+      return patient;
+    });
+
+    // Re-render table
+    renderPatientTable();
+
+    // Close modal
+    closeModal();
+  });
+
+  // Render function to update the HTML table
+  function renderPatientTable() {
+    const tbody = document.querySelector("#patients tbody");
+    tbody.innerHTML = ""; // Clear current rows
+
+    patients.forEach(patient => {
+      const row = document.createElement("tr");
+      row.classList.add("border-b");
+
+      row.innerHTML = `
+        <td class="py-2 px-4">${patient.id}</td>
+        <td class="py-2 px-4">${patient.name}</td>
+        <td class="py-2 px-4">${patient.age}</td>
+        <td class="py-2 px-4">${patient.lastVisit}</td>
+        <td class="py-2 px-4">${patient.status}</td>
+        <td class="py-2 px-4">
+          <button onclick="openModal('${patient.id}', '${patient.name}', ${patient.age}, '${patient.status}')" 
+                  class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+            Update
+          </button>
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  // Initial render
+  renderPatientTable();
+</script>
+
+
+</body>
+</html>

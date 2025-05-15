@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aadhaar Access - Arogya Mitra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-blue-600"><a href="./landingPage.html">Arogya Mitra</a></h1>
+    <div>
+      <a href="./PatientLogin/PatientLogin.html" class="text-blue-600 hover:underline mr-4">Sign In</a>
+      <a href="./PatientRegister/register.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Register</a>
+    </div>
+  </nav>
+
+  <!-- Aadhaar Access Section -->
+  <section class="max-w-xl mx-auto bg-white shadow-md rounded-xl p-6 mt-10">
+    <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">Access Patient Record via Aadhaar</h2>
+
+    <form id="aadhaarForm" class="space-y-4">
+      <div>
+        <label for="aadhaar" class="block text-sm font-medium text-gray-700">Enter Aadhaar Number</label>
+        <input type="text" id="aadhaar" name="aadhaar" maxlength="12" required pattern="\d{12}"
+          class="mt-1 w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="e.g. 123456789012"/>
+      </div>
+
+      <div class="text-center">
+        <button type="submit"
+          class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Fetch Records</button>
+      </div>
+    </form>
+
+    <!-- Display fetched data -->
+    <div id="patientData" class="mt-6 hidden border-t pt-4">
+      <h3 class="text-lg font-semibold mb-2 text-gray-800">Patient Details:</h3>
+      <p><strong>Name:</strong> <span id="name"></span></p>
+      <p><strong>Age:</strong> <span id="age"></span></p>
+      <p><strong>Last Visit:</strong> <span id="lastVisit"></span></p>
+      <p><strong>Status:</strong> <span id="status"></span></p>
+      <p><strong>Heartbeat:</strong> <span id="heartbeat"></span> bpm</p>
+      <p><strong>SpO2 Level:</strong> <span id="spo2"></span>%</p>
+    </div>
+  </section>
+
+  <!-- Firebase Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyApx4OnuQ_1CJj0IPMxzt4NG_6-4Bigj4c",
+      authDomain: "ruralhealthportal.firebaseapp.com",
+      projectId: "ruralhealthportal",
+      storageBucket: "ruralhealthportal.firebasestorage.app",
+      messagingSenderId: "913688022135",
+      appId: "1:913688022135:web:e2d14f60f91e5114228a72",
+      measurementId: "G-7WJ36BBP9S"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const aadhaarForm = document.getElementById("aadhaarForm");
+    const patientDataDiv = document.getElementById("patientData");
+
+    const nameEl = document.getElementById("name");
+    const ageEl = document.getElementById("age");
+    const lastVisitEl = document.getElementById("lastVisit");
+    const statusEl = document.getElementById("status");
+    const heartbeatEl = document.getElementById("heartbeat");
+    const spo2El = document.getElementById("spo2");
+
+    aadhaarForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const aadhaar = document.getElementById("aadhaar").value.trim();
+
+      if (!/^\d{12}$/.test(aadhaar)) {
+        alert("Please enter a valid 12-digit Aadhaar number.");
+        return;
+      }
+
+      const q = query(collection(db, "PatientDetails"), where("aadharnumber", "==", Number(aadhaar)));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        alert("No record found for this Aadhaar number.");
+        patientDataDiv.classList.add("hidden");
+        return;
+      }
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        nameEl.textContent = data.name || "N/A";
+        ageEl.textContent = data.age || "N/A";
+        lastVisitEl.textContent = data.lastVisit || "N/A";
+        statusEl.textContent = data.status || "N/A";
+        heartbeatEl.textContent = data.heartbeat || "N/A";
+        spo2El.textContent = data.spo2 || "N/A";
+
+        patientDataDiv.classList.remove("hidden");
+      });
+    });
+  </script>
+</body>
+</html>

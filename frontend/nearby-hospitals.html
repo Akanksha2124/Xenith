@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nearby Hospitals - Arogya Mitra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-blue-600"><a href="./landingPage.html">Arogya Mitra</a></h1>
+    <div>
+      <a href="./PatientLogin/PatientLogin.html" class="text-blue-600 hover:underline mr-4">Sign In</a>
+      <a href="./PatientRegister/register.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Register</a>
+    </div>
+  </nav>
+
+  <!-- Nearby Hospitals Section -->
+  <section class="max-w-3xl mx-auto bg-white shadow-md rounded-xl p-6 mt-10">
+    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-4">Nearby Hospitals</h2>
+    <p class="text-center text-gray-600 mb-6">Allow location access to find nearby healthcare centers.</p>
+
+    <div class="text-center mb-6">
+      <button onclick="getLocation()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+        📍 Show Nearby Hospitals
+      </button>
+    </div>
+
+    <div id="hospitalList" class="space-y-4">
+      <!-- Hospital cards will be inserted here -->
+    </div>
+  </section>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showNearbyHospitals, handleError);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showNearbyHospitals(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      // You can replace this mock data with real API call using lat & lon
+     const hospitals = [
+  {
+    name: "Apollo Hospitals - Bannerghatta Road",
+    distance: "5.2 km",
+    address: "9/12, Bannerghatta Rd, Ulsoor, Bengaluru",
+  },
+  {
+    name: "Fortis Hospital",
+    distance: "8.7 km",
+    address: "56/12, Rajajinagar, Bengaluru",
+  },
+  {
+    name: "Manipal Hospital",
+    distance: "3.4 km",
+    address: "98, Old Airport Road, Bengaluru",
+  },
+  {
+    name: "Vydehi Institute of Medical Sciences",
+    distance: "6.1 km",
+    address: "82, Hosur Main Road, Whitefield, Bengaluru",
+  },
+  {
+    name: "Columbia Asia Referral Hospital",
+    distance: "10.5 km",
+    address: "Survey No. 57, Opp. RMZ Ecospace IT Park, Doddanekkundi, Bengaluru",
+  },
+  {
+    name: "Sakra World Hospital",
+    distance: "4.9 km",
+    address: "258/A, Devarabeesana Halli, Outer Ring Road, Bengaluru",
+  },
+  {
+    name: "Bangalore Baptist Hospital",
+    distance: "7.3 km",
+    address: "K.G. Halli, Bellary Road, Bengaluru",
+  }
+];
+
+      const list = document.getElementById("hospitalList");
+      list.innerHTML = "";
+
+      hospitals.forEach(hospital => {
+        const card = document.createElement("div");
+        card.className = "border rounded-lg p-4 shadow bg-gray-50";
+
+        card.innerHTML = `
+          <h3 class="text-xl font-semibold text-blue-700">${hospital.name}</h3>
+          <p class="text-gray-700">📍 ${hospital.address}</p>
+          <p class="text-sm text-gray-500">Distance: ${hospital.distance}</p>
+        `;
+
+        list.appendChild(card);
+      });
+    }
+
+    function handleError(error) {
+      alert("Unable to access location. Please allow permission or try again.");
+    }
+  </script>
+
+</body>
+</html>

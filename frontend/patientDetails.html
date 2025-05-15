@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Details - Arogya Mitra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
+
+  <div class="w-full max-w-xl bg-white p-8 rounded-xl shadow-lg">
+    <h2 class="text-2xl font-bold text-blue-600 mb-6 text-center">Patient Details</h2>
+    
+    <form id="patientForm" class="space-y-4">
+      <div>
+        <label for="name" class="block text-gray-700 font-semibold mb-1">Full Name</label>
+        <input type="text" id="name" name="name" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div>
+        <label for="age" class="block text-gray-700 font-semibold mb-1">Age</label>
+        <input type="number" id="age" name="age" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div>
+        <label for="aadharnumber" class="block text-gray-700 font-semibold mb-1">Aadhar Number</label>
+        <input type="number" id="aadharnumber" name="aadharnumber" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div>
+        <label for="lastVisit" class="block text-gray-700 font-semibold mb-1">Last Visit</label>
+        <input type="date" id="lastVisit" name="lastVisit" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div>
+        <label for="status" class="block text-gray-700 font-semibold mb-1">Status</label>
+        <select id="status" name="status" required class="w-full px-4 py-2 border rounded-lg">
+          <option value="Active">Active</option>
+          <option value="Recovered">Recovered</option>
+          <option value="Critical">Critical</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="heartbeat" class="block text-gray-700 font-semibold mb-1">Heartbeat Rate (BPM)</label>
+        <input type="number" id="heartbeat" name="heartbeat" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div>
+        <label for="spo2" class="block text-gray-700 font-semibold mb-1">SpO₂ Level (%)</label>
+        <input type="number" id="spo2" name="spo2" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div class="pt-4 text-center">
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+          Save Patient Details
+        </button>
+      </div>
+    </form>
+
+    <p id="statusMessage" class="mt-4 text-center text-green-600 font-semibold hidden">Patient details saved successfully!</p>
+  </div>
+
+  <!-- Firebase & Firestore Integration -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyApx4OnuQ_1CJj0IPMxzt4NG_6-4Bigj4c",
+      authDomain: "ruralhealthportal.firebaseapp.com",
+      projectId: "ruralhealthportal",
+      storageBucket: "ruralhealthportal.firebasestorage.app",
+      messagingSenderId: "913688022135",
+      appId: "1:913688022135:web:e2d14f60f91e5114228a72",
+      measurementId: "G-7WJ36BBP9S"
+    };
+
+    // Initialize Firebase and Firestore
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Handle Form Submission
+    const form = document.getElementById("patientForm");
+    const statusMessage = document.getElementById("statusMessage");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const patientData = {
+        name: form.name.value,
+        age: parseInt(form.age.value),
+        aadharnumber: parseInt(form.aadharnumber.value),
+        lastVisit: form.lastVisit.value,
+        status: form.status.value,
+        heartbeat: parseInt(form.heartbeat.value),
+        spo2: parseInt(form.spo2.value)
+      };
+
+      try {
+        await addDoc(collection(db, "PatientDetails"), patientData);
+        statusMessage.classList.remove("hidden");
+        form.reset();
+      } catch (error) {
+        alert("Error saving data: " + error.message);
+      }
+    });
+  </script>
+
+</body>
+</html>

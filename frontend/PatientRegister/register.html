@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Registration</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com "></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
+
+  <div class="w-full max-w-lg bg-white rounded-lg shadow-md p-6">
+    <!-- Header -->
+    <header class="text-center mb-6">
+      <h1 class="text-2xl font-bold text-indigo-700">Signup</h1>
+    
+    </header>
+
+    <!-- Form -->
+    <main>
+      <form id="registrationForm" class="space-y-4">
+        
+        <!-- Full Name -->
+        <div>
+          <label for="fullname" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            placeholder="Amrit Parashar"
+            required
+            minlength="2"
+            maxlength="50"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <!-- Aadhar Card Number -->
+        <div>
+          <label for="aadharCard" class="block text-sm font-medium text-gray-700 mb-1">Aadhar Card Number</label>
+          <input
+            type="text"
+            id="aadharCard"
+            name="aadharCard"
+            placeholder="1234 5678 9012"
+            pattern="\d{12}"
+            title="Enter a valid 12-digit Aadhar number"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="At least 8 characters"
+            minlength="8"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <!-- Age -->
+        <div>
+          <label for="age" class="block text-sm font-medium text-gray-700 mb-1">Age</label>
+          <input
+            type="number"
+            id="age"
+            name="age"
+            min="0"
+            max="120"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <!-- Last Vaccinated -->
+        <div>
+          <label for="lastVaccinated" class="block text-sm font-medium text-gray-700 mb-1">Last Vaccinated</label>
+          <input
+            type="date"
+            id="lastVaccinated"
+            name="lastVaccinated"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <!-- Blood Pressure -->
+        <div>
+          <label for="bloodPressure" class="block text-sm font-medium text-gray-700 mb-1">Blood Pressure (mmHg)</label>
+          <input
+            type="text"
+            id="bloodPressure"
+            name="bloodPressure"
+            placeholder="e.g., 120/80"
+            pattern="\d{2,3}/\d{2,3}"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <!-- Heart Rate -->
+        <div>
+          <label for="heartRate" class="block text-sm font-medium text-gray-700 mb-1">Heart Rate (bpm)</label>
+          <input
+            type="number"
+            id="heartRate"
+            name="heartRate"
+            min="30"
+            max="200"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <!-- Body Temperature -->
+        <div>
+          <label for="temperature" class="block text-sm font-medium text-gray-700 mb-1">Temperature (°C)</label>
+          <input
+            type="number"
+            id="temperature"
+            name="temperature"
+            step="0.1"
+            min="35"
+            max="42"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+        <div>
+          <label for="remarks" class="block text-sm font-medium text-gray-700 mb-1">Remarks</label>
+          <input
+            type="text"
+            id="remarks"
+            name="remarks"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button
+            type="submit"
+            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
+          >
+            Create Account
+          </button>
+        </div>
+      </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-6 text-center">
+      <p class="text-sm text-gray-600">
+        Already have an account?
+        <a href="../PatientLogin/PatientLogin.html" class="text-indigo-600 hover:underline">Login</a>
+      </p>
+    </footer>
+  </div>
+
+  <!-- Script for Alert and Redirect -->
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent default form submission
+
+      // Show popup message
+      alert("Account created successfully!");
+
+      // Redirect to landing page
+      window.location.href = "../landingPage.html";
+    });
+  </script>
+</body>
+</html>

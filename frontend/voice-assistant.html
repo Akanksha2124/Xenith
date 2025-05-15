@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Voice Assistant - Arogya Mitra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-blue-600"><a href="./landingPage.html">Arogya Mitra</a></h1>
+    <div>
+      <a href="/login.html" class="text-blue-600 hover:underline mr-4">Sign In</a>
+      <a href="/register.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Register</a>
+    </div>
+  </nav>
+
+  <!-- Voice Assistant Section -->
+  <section class="max-w-2xl mx-auto bg-white shadow-md rounded-xl p-6 mt-10 text-center">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Ask Your Health Query</h2>
+    <p class="text-gray-600 mb-6">Click the button and speak your question in your regional language.</p>
+
+    <button id="startBtn" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+      🎤 Start Listening
+    </button>
+
+    <!-- Display Recognized Query -->
+    <div class="mt-6">
+      <h3 class="text-lg font-semibold text-gray-800 mb-2">You Said:</h3>
+      <p id="queryText" class="text-gray-700 italic">--</p>
+    </div>
+
+    <!-- Display Dummy Response -->
+    <div class="mt-6 border-t pt-4">
+      <h3 class="text-lg font-semibold text-gray-800 mb-2">Assistant's Response:</h3>
+      <p id="assistantResponse" class="text-gray-700">--</p>
+    </div>
+  </section>
+
+  <script>
+    const startBtn = document.getElementById("startBtn");
+    const queryText = document.getElementById("queryText");
+    const responseText = document.getElementById("assistantResponse");
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Sorry, your browser does not support voice recognition.");
+      startBtn.disabled = true;
+    } else {
+      const recognition = new SpeechRecognition();
+      recognition.lang = "hi-IN"; // You can change to "bn-IN", "en-IN", etc.
+      recognition.interimResults = false;
+      recognition.continuous = false;
+
+      startBtn.addEventListener("click", () => {
+        recognition.start();
+        queryText.textContent = "Listening...";
+        responseText.textContent = "--";
+      });
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        queryText.textContent = transcript;
+
+        // Dummy response logic (replace this with real backend AI)
+        if (transcript.toLowerCase().includes("fever")) {
+          responseText.textContent = "Drink fluids, rest well, and consult a doctor if fever persists.";
+        } else if (transcript.toLowerCase().includes("hospital")) {
+          responseText.textContent = "The nearest hospital is 5 km away at PHC Rampur.";
+        } else {
+          responseText.textContent = "Sorry, I didn't fully understand. Please consult a doctor.";
+        }
+      };
+
+      recognition.onerror = (e) => {
+        queryText.textContent = "Could not understand. Please try again.";
+        console.error("Speech recognition error:", e);
+      };
+    }
+  </script>
+
+</body>
+</html>
