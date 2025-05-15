@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Patient Registration - Rural Health Portal{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+    <header class="mb-6 text-center">
+      <h1 class="text-2xl font-bold text-blue-600">Signup</h1>
+      <p class="text-gray-600">It just takes 30 seconds</p>
+    </header>
+
+    <main>
+      <form method="POST" action="{{ url_for('patient_register') }}" class="space-y-4">
+        <div>
+          <label for="username" class="block text-gray-700">User Name</label>
+          <input type="text" id="username" name="username" placeholder="Amrit Parashar" required
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+          <label for="aadhaar" class="block text-gray-700">Aadhaar Number</label>
+          <input type="text" id="aadhaar" name="aadhaar" required
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+          <label for="password" class="block text-gray-700">Password</label>
+          <input type="password" id="password" name="password" placeholder="At least 8 characters" required
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+          <button type="submit"
+            class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Create Account</button>
+        </div>
+      </form>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="mt-4 text-center">
+            {% for category, message in messages %}
+              <p class="text-{{ 'green' if category == 'success' else 'red' }}-600 font-semibold">{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </main>
+
+    <footer class="mt-6 text-center text-gray-600">
+      <p>Already have an account? 
+        <a href="{{ url_for('patient_login') }}" class="text-blue-600 hover:underline">Login</a>
+      </p>
+    </footer>
+  </div>
+</div>
+{% endblock %}

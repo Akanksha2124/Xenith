@@ -1,0 +1,15 @@
+<nav class="bg-white shadow p-4 flex justify-between items-center">
+  <h1 class="text-2xl font-bold text-blue-600"><a href="{{ url_for('landing_page') }}">Rural Health Portal</a></h1>
+  <div>
+    {% if session.get('patient_logged_in') %}
+      <span class="mr-4">Welcome, Patient</span>
+      <a href="{{ url_for('logout') }}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Logout</a>
+    {% elif session.get('admin_logged_in') %}
+      <span class="mr-4">Welcome, Admin</span>
+      <a href="{{ url_for('logout') }}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Logout</a>
+    {% else %}
+      <a href="{{ url_for('patient_login') }}" class="text-blue-600 hover:underline mr-4">Sign In</a>
+      <a href="{{ url_for('patient_register') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Register</a>
+    {% endif %}
+  </div>
+</nav>

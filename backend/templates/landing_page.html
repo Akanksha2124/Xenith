@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Rural Health Portal - Home{% endblock %}
+
+{% block content %}
+<section class="bg-gradient-to-b from-blue-500 to-blue-700 text-white py-12">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <h1 class="text-4xl font-bold mb-4">Welcome to Rural Health Portal</h1>
+    <p class="text-xl mb-8">Connecting rural communities with quality healthcare services</p>
+    {% if not session.get('patient_logged_in') and not session.get('admin_logged_in') %}
+      <div class="flex justify-center space-x-4">
+        <a href="{{ url_for('patient_register') }}" class="bg-white text-blue-600 px-6 py-2 rounded-lg hover:bg-gray-100 transition">Register</a>
+        <a href="{{ url_for('patient_login') }}" class="border border-white text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition">Sign In</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="max-w-5xl mx-auto py-10 px-4">
+  <h2 class="text-2xl font-bold text-gray-800 text-center mb-8">Our Services</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Card 1 -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+      <div class="text-blue-600 text-4xl mb-4">🔍</div>
+      <h3 class="text-xl font-semibold mb-2">Check Aadhaar Status</h3>
+      <p class="text-gray-600 mb-4">Access your health records using your Aadhaar number securely.</p>
+      <a href="{{ url_for('aadhar_access') }}" class="text-blue-600 hover:underline">Check Now →</a>
+    </div>
+    
+    <!-- Card 2 -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+      <div class="text-blue-600 text-4xl mb-4">🏥</div>
+      <h3 class="text-xl font-semibold mb-2">Find Nearby Hospitals</h3>
+      <p class="text-gray-600 mb-4">Locate the nearest healthcare facilities in your area quickly.</p>
+      <a href="{{ url_for('nearby_hospitals') }}" class="text-blue-600 hover:underline">Find Hospitals →</a>
+    </div>
+    
+    <!-- Card 3 -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+      <div class="text-blue-600 text-4xl mb-4">🎤</div>
+      <h3 class="text-xl font-semibold mb-2">Voice Assistant</h3>
+      <p class="text-gray-600 mb-4">Ask health-related questions in your regional language.</p>
+      <a href="{{ url_for('voice_assistant') }}" class="text-blue-600 hover:underline">Ask Now →</a>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray-100 py-10">
+  <div class="max-w-5xl mx-auto px-4">
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-8">Ayushman Bharat Scheme</h2>
+    <div class="bg-white p-6 rounded-xl shadow-md">
+      <p class="text-gray-600 mb-4 text-center">Check your eligibility for Ayushman Bharat health insurance coverage.</p>
+      <div class="text-center">
+        <a href="{{ url_for('ayushman_check') }}" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 inline-block">Check Eligibility</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-5xl mx-auto py-10 px-4">
+  <h2 class="text-2xl font-bold text-gray-800 text-center mb-8">For Healthcare Workers</h2>
+  <div class="bg-white p-6 rounded-xl shadow-md">
+    <p class="text-gray-600 mb-4 text-center">Authorized healthcare workers can access the admin dashboard here.</p>
+    <div class="text-center">
+      <a href="{{ url_for('doctor_login') }}" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 inline-block">Healthcare Worker Login</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

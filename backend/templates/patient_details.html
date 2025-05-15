@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Patient Details - Rural Health Portal{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center px-4 bg-gray-100">
+  <div class="w-full max-w-xl bg-white p-8 rounded-xl shadow-lg">
+    <h2 class="text-2xl font-bold text-blue-600 mb-6 text-center">Patient Details</h2>
+    
+    <form action="{{ url_for('patient_details') }}" method="POST" class="space-y-4">
+      <div>
+        <label for="name" class="block text-gray-700 font-semibold mb-1">Full Name</label>
+        <input type="text" id="name" name="name" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div>
+        <label for="age" class="block text-gray-700 font-semibold mb-1">Age</label>
+        <input type="number" id="age" name="age" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div>
+        <label for="aadharnumber" class="block text-gray-700 font-semibold mb-1">Aadhar Number</label>
+        <input type="number" id="aadharnumber" name="aadharnumber" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div>
+        <label for="lastVisit" class="block text-gray-700 font-semibold mb-1">Last Visit</label>
+        <input type="date" id="lastVisit" name="lastVisit" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div>
+        <label for="status" class="block text-gray-700 font-semibold mb-1">Status</label>
+        <select id="status" name="status" required class="w-full px-4 py-2 border rounded-lg">
+          <option value="Active">Active</option>
+          <option value="Recovered">Recovered</option>
+          <option value="Critical">Critical</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="heartbeat" class="block text-gray-700 font-semibold mb-1">Heartbeat Rate (BPM)</label>
+        <input type="number" id="heartbeat" name="heartbeat" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div>
+        <label for="spo2" class="block text-gray-700 font-semibold mb-1">SpO₂ Level (%)</label>
+        <input type="number" id="spo2" name="spo2" required class="w-full px-4 py-2 border rounded-lg">
+      </div>
+
+      <div class="pt-4 text-center">
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+          Save Patient Details
+        </button>
+      </div>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="mt-4 text-center">
+          {% for category, message in messages %}
+            <p class="text-{{ 'green' if category == 'success' else 'red' }}-600 font-semibold">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+  </div>
+</div>
+{% endblock %}

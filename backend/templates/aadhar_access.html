@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Aadhaar Access - Rural Health Portal{% endblock %}
+
+{% block content %}
+<section class="max-w-xl mx-auto bg-white shadow-md rounded-xl p-6 mt-10">
+  <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">Access Patient Record via Aadhaar</h2>
+
+  <form id="aadhaarForm" class="space-y-4">
+    <div>
+      <label for="aadhaar" class="block text-sm font-medium text-gray-700">Enter Aadhaar Number</label>
+      <input type="text" id="aadhaar" name="aadhaar" maxlength="12" required pattern="\d{12}"
+        class="mt-1 w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        placeholder="e.g. 123456789012"/>
+    </div>
+
+    <div class="text-center">
+      <button type="submit"
+        class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Fetch Records</button>
+    </div>
+  </form>
+
+  <!-- Display fetched data -->
+  <div id="patientData" class="mt-6 hidden border-t pt-4">
+    <h3 class="text-lg font-semibold mb-2 text-gray-800">Patient Details:</h3>
+    <p><strong>Name:</strong> <span id="name"></span></p>
+    <p><strong>Age:</strong> <span id="age"></span></p>
+    <p><strong>Last Visit:</strong> <span id="lastVisit"></span></p>
+    <p><strong>Status:</strong> <span id="status"></span></p>
+    <p><strong>Heartbeat:</strong> <span id="heartbeat"></span> bpm</p>
+    <p><strong>SpO2 Level:</strong> <span id="spo2"></span>%</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById("aadhaarForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const aadhaar = document.getElementById("aadhaar").value.trim();
+
+    if (!validateAadhaar(aadhaar)) {
+      showNotification("Please enter a valid 12-digit Aadhaar number.", "error");
+      return;
+    }
+
+    // Mock data - in a real app, this would be a fetch to your API
+    if (aadhaar === "123456789012") {
+      document.getElementById("name").textContent = "Ramesh Kumar";
+      document.getElementById("age").textContent = "45";
+      document.getElementById("lastVisit").textContent = "12 March 2025";
+      document.getElementById("status").textContent = "Active";
+      document.getElementById("heartbeat").textContent = "78";
+      document.getElementById("spo2").textContent = "98";
+      
+      document.getElementById("patientData").classList.remove("hidden");
+    } else if (aadhaar === "987654321012") {
+      document.getElementById("name").textContent = "Sita Devi";
+      document.getElementById("age").textContent = "38";
+      document.getElementById("lastVisit").textContent = "09 March 2025";
+      document.getElementById("status").textContent = "Active";
+      document.getElementById("heartbeat").textContent = "72";
+      document.getElementById("spo2").textContent = "97";
+      
+      document.getElementById("patientData").classList.remove("hidden");
+    } else {
+      showNotification("No record found for this Aadhaar number.", "error");
+      document.getElementById("patientData").classList.add("hidden");
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Ayushman Eligibility Checker - Rural Health Portal{% endblock %}
+
+{% block content %}
+<section class="max-w-xl mx-auto mt-10 bg-white p-6 rounded-xl shadow-md">
+  <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Ayushman Bharat Eligibility Checker</h2>
+
+  <form id="eligibilityForm" class="space-y-4">
+    <label class="block">
+      <span class="text-gray-700">Aadhaar / Ration Card / Mobile Number:</span>
+      <input type="text" id="idInput" required
+        class="mt-1 block w-full border rounded-md p-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Enter your Aadhaar or mobile number" />
+    </label>
+
+    <div class="text-center">
+      <button type="submit"
+        class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Check Eligibility</button>
+    </div>
+  </form>
+
+  <div id="resultBox" class="mt-6 hidden p-4 rounded bg-gray-100 border border-gray-300">
+    <h3 class="text-xl font-semibold text-green-700">Result:</h3>
+    <p id="resultText" class="text-gray-700 mt-2"></p>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById("eligibilityForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const input = document.getElementById("idInput").value.trim();
+    const resultBox = document.getElementById("resultBox");
+    const resultText = document.getElementById("resultText");
+
+    if (input === "") {
+      showNotification("Please enter your Aadhaar or mobile number.", "error");
+      return;
+    }
+
+    // Simulated check (you can replace this with a server-side API call)
+    if (input.endsWith("7") || input.endsWith("3")) {
+      resultText.innerText = "✅ Eligible under Ayushman Bharat scheme.";
+      resultBox.classList.remove("hidden");
+      resultBox.classList.remove("bg-red-100");
+      resultBox.classList.add("bg-green-100");
+    } else {
+      resultText.innerText = "❌ Not found in the eligible beneficiary list.";
+      resultBox.classList.remove("hidden");
+      resultBox.classList.remove("bg-green-100");
+      resultBox.classList.add("bg-red-100");
+    }
+  });
+</script>
+{% endblock %}
